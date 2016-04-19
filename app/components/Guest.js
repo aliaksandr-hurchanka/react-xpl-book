@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Genre extends Component {
+export default class Guest extends Component {
   render() {
     return (
       <div className='row'>
