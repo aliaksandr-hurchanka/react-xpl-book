@@ -3,8 +3,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var DEV_ENV =	'development';
-var PROD_ENV =	'production';
+var DEV_ENV = 'development';
+var PROD_ENV = 'production';
 
 var environments = [
 	DEV_ENV,
@@ -14,13 +14,13 @@ var environments = [
 var environment = getRunningEnvironment();
 
 function getRunningEnvironment() {
-	var selectedEnvironment = process.env.NODE_ENV;
+    var selectedEnvironment = process.env.NODE_ENV;
 
-	if (environments.indexOf(selectedEnvironment) === -1) {
-		return DEV_ENV;
-	}
+    if (environments.indexOf(selectedEnvironment) === -1) {
+        return DEV_ENV;
+    }
 
-	return selectedEnvironment;
+    return selectedEnvironment;
 }
 
 var config = {
@@ -30,6 +30,8 @@ var config = {
         vendor: [
             'react',
 			'react-dom',
+            'react-redux',
+			'redux',
             'react-router'
         ]
     },
@@ -61,6 +63,10 @@ var config = {
                 query: {
                     presets: ['react', 'es2015']
                 }
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!css'
             }
         ]
     },
@@ -72,7 +78,7 @@ var config = {
 };
 
 if (environment == PROD_ENV) {
-	config.plugins.push(new webpack.optimize.UglifyJsPlugin({}));
+    config.plugins.push(new webpack.optimize.UglifyJsPlugin({}));
 }
 
 module.exports = config
